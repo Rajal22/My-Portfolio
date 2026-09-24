@@ -1,0 +1,34 @@
+{% load portfolio_extras %}
+<article class="card">
+  {% if project.live_link %}
+    <a href="{{ project.live_link }}" target="_blank" class="card-stretched-link" aria-label="Open {{ project.title }}"></a>
+  {% elif project.github_link %}
+    <a href="{{ project.github_link }}" target="_blank" class="card-stretched-link" aria-label="Open {{ project.title }}"></a>
+  {% endif %}
+
+  <div class="card-body">
+    <div class="card-meta">
+      <span style="color: var(--accent-primary); font-weight: 600;">Data Science</span>
+    </div>
+
+    <h3 class="card-title">{{ project.title }}</h3>
+    <p class="card-desc">{{ project.description }}</p>
+
+    {% if project.tech_stack %}
+      <div class="tech-stack">
+        {% for tech in project.tech_stack|split:"," %}
+          <span class="tech-tag">{{ tech }}</span>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <div style="margin-top: auto; padding-top: 16px; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between;">
+      {% if project.live_link %}
+        <a href="{{ project.live_link }}" target="_blank" class="btn btn-primary" style="font-size: 0.75rem; padding: 6px 12px;">Live Demo</a>
+      {% endif %}
+      {% if project.github_link %}
+        <a href="{{ project.github_link }}" target="_blank" class="btn btn-secondary" style="font-size: 0.75rem; padding: 6px 12px;">GitHub</a>
+      {% endif %}
+    </div>
+  </div>
+</article>

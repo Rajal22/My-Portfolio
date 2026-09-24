@@ -1,0 +1,47 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Hero Section -->
+<section id="hero" class="hero">
+  <div class="hero-tag">
+    <span class="hero-dot"></span>
+    Available for Projects
+  </div>
+  <h1 class="hero-title">
+    Architecting intelligent ML models &amp; high-scale Django backends.
+  </h1>
+  <p class="hero-desc">
+    Specializing in Python, predictive machine learning, and high-performance Django REST microservices.
+  </p>
+  <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+    <a href="#projects" class="btn btn-primary">View Projects</a>
+    <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+  </div>
+</section>
+
+<!-- Projects Section -->
+<section id="projects">
+  <div class="section-header">
+    <h2 class="section-title">Featured Projects</h2>
+    <p class="section-subtitle">Machine learning models, ETL pipelines &amp; web backends</p>
+  </div>
+
+  <div class="card-grid">
+    {% for project in projects %}
+      {% include 'portfolio/partials/project_card.html' with project=project %}
+    {% empty %}
+      <p style="color: var(--text-muted);">No projects added yet.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" style="padding: 48px 0 80px;">
+  <div class="section-header">
+    <h2 class="section-title">Get In Touch</h2>
+    <p class="section-subtitle">Have a project or looking for a Data Science / Django engineer?</p>
+  </div>
+  <a href="mailto:maharjanrajal22@gmail.com" class="btn btn-primary">Send Email</a>
+</section>
+{% endblock %}
