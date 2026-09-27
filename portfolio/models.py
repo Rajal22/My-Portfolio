@@ -7,7 +7,7 @@ class Project(models.Model):
     tech_stack = models.CharField(max_length=200)
     github_link = models.URLField()
     live_link = models.URLField(blank=True, null=True)
-    image_url = models.URLField(blank=True, null=True)
+    image_url = models.ImageField(upload_to="projects/", blank=True, null=True)
     order = models.PositiveIntegerField(default=0, help_text="Lower numbers show first")
 
     class Meta:

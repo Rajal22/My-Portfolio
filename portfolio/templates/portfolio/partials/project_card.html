@@ -6,6 +6,12 @@
     <a href="{{ project.github_link }}" target="_blank" class="card-stretched-link" aria-label="Open {{ project.title }}"></a>
   {% endif %}
 
+  {% if project.image %}
+    <img src="{{ project.image.url }}" alt="{{ project.title }}" class="card-media">
+  {% elif project.image_url %}
+    <img src="{{ project.image_url }}" alt="{{ project.title }}" class="card-media">
+  {% endif %}
+
   <div class="card-body">
     <div class="card-meta">
       <span style="color: var(--accent-primary); font-weight: 600;">Data Science</span>
