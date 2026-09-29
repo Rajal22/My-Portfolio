@@ -1,4 +1,4 @@
-{% load portfolio_extras static %}
+{% load portfolio_extras %}
 <article class="card">
   {% if project.live_link %}
     <a href="{{ project.live_link }}" target="_blank" class="card-stretched-link" aria-label="Open {{ project.title }}"></a>
@@ -7,13 +7,7 @@
   {% endif %}
 
   {% if project.image_url %}
-    {% if 'http' in project.image_url %}
-      <img src="{{ project.image_url }}" alt="{{ project.title }}" class="card-media">
-    {% else %}
-      <img src="{% static project.image_url %}" alt="{{ project.title }}" class="card-media">
-    {% endif %}
-  {% elif project.image %}
-    <img src="{{ project.image.url }}" alt="{{ project.title }}" class="card-media">
+    <img src="{{ project.image_url.url }}" alt="{{ project.title }}" class="card-media">
   {% endif %}
 
   <div class="card-body">
