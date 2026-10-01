@@ -351,6 +351,70 @@
         fill: currentColor;
         flex-shrink: 0;
       }
+
+      /* Mobile nav toggle */
+      .nav-toggle {
+        display: none;
+        background: transparent;
+        border: none;
+        color: var(--text-primary);
+        cursor: pointer;
+        padding: 8px;
+      }
+      .nav-toggle .icon { width: 24px; height: 24px; }
+
+      /* Responsive */
+      @media (max-width: 760px) {
+        .container { padding: 0 16px; }
+
+        .header-inner { height: 60px; }
+        .brand-badge { display: none; }
+
+        .nav-toggle { display: inline-flex; }
+
+        .nav-links {
+          position: fixed;
+          top: 60px;
+          left: 0;
+          right: 0;
+          flex-direction: column;
+          gap: 0;
+          background: var(--bg-surface);
+          border-bottom: 1px solid var(--border-subtle);
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.25s ease;
+        }
+        .nav-links.open { max-height: 240px; }
+        .nav-links a {
+          padding: 16px;
+          border-bottom: 1px solid var(--border-subtle);
+          width: 100%;
+        }
+
+        .header-inner .btn-primary .btn-label { display: none; }
+
+        .hero { padding: 40px 0 32px; }
+        .hero-title { max-width: 100%; }
+        .hero-desc { font-size: 1rem; }
+
+        .section-title { font-size: 1.5rem; }
+
+        .card-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .metrics-grid { padding: 16px; }
+
+        footer { margin-top: 56px; padding: 28px 0; }
+        .footer-inner { flex-direction: column; align-items: flex-start; gap: 20px; }
+        .footer-links { gap: 14px; }
+      }
+
+      @media (max-width: 400px) {
+        .hero-title { font-size: 2rem; }
+        .btn { padding: 9px 14px; font-size: 0.82rem; }
+      }
     </style>
 </head>
 <body>
@@ -375,14 +439,17 @@
           Rajal Maharjan
           <span class="brand-badge">Data Science · Django</span>
         </a>
-        <nav class="nav-links">
+        <nav class="nav-links" id="nav-links">
           <a href="#about" class="nav-link">About</a>
           <a href="#projects" class="nav-link">Projects</a>
           <a href="#contact" class="nav-link">Contact</a>
         </nav>
         <div style="display: flex; gap: 12px; align-items: center;">
           <button id="theme-toggle" class="btn btn-secondary" style="padding: 8px 12px;" title="Toggle Theme">🌓</button>
-          <a href="mailto:maharjanrajal22@gmail.com" class="btn btn-primary">Hire Me</a>
+          <a href="mailto:maharjanrajal22@gmail.com" class="btn btn-primary"><span class="btn-label">Hire Me</span></a>
+          <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+          </button>
         </div>
       </div>
     </header>
@@ -420,6 +487,22 @@
           const current = document.documentElement.getAttribute('data-theme');
           const target = current === 'light' ? 'dark' : 'light';
           document.documentElement.setAttribute('data-theme', target);
+        });
+      }
+
+      // Mobile nav toggle
+      const navToggle = document.getElementById('nav-toggle');
+      const navLinks = document.getElementById('nav-links');
+      if (navToggle && navLinks) {
+        navToggle.addEventListener('click', () => {
+          const isOpen = navLinks.classList.toggle('open');
+          navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+        navLinks.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            navLinks.classList.remove('open');
+            navToggle.setAttribute('aria-expanded', 'false');
+          });
         });
       }
     </script>
